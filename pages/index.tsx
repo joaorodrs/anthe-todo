@@ -1,17 +1,25 @@
 import Head from 'next/head'
+import styles from '../styles/pages/Home.module.css'
 
 const Home: React.FC = () => {
   return (
-    <div>
+    <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>Anthe</title>
         <link rel="icon" href="/favicon.ico" />
-        <link rel="preconnect" href="https://fonts.gstatic.com"/>
-        <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700&family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet"/>
       </Head>
 
-      <main>
-        <h1>Hello World!</h1>
+      <h1 className={styles.logoTitleBackground}>anthe.</h1>
+
+      <main className={styles.main}>
+        <nav className={styles.navigationBar}>
+          <h1>a</h1>
+          <div>
+            <button>Início</button>
+            <button>Entrar</button>
+            <button className={styles.registerButton}>Cadastre-se</button>
+          </div>
+        </nav>
       </main>
     </div>
   )
