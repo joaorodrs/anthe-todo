@@ -4,14 +4,6 @@
   height: 100vh;
 }
 
-.logoTitleBackground {
-  position: absolute;
-  top: 8vh;
-  font-size: 13vh;
-  left: 5%;
-  color: #1a092c;
-}
-
 .main {
   height: 100%;
   display: flex;
@@ -27,7 +19,7 @@
 }
 
 .navigationBar h1 {
-  color: white;
+  color: #471B75;
   margin-left: 25px;
   font-size: 40px;
   line-height: 30px;
@@ -52,6 +44,49 @@
   border-radius: 8px;
 }
 
-.navigationBar button:hover {
+.registerButton:hover {
+  box-shadow: 0 0 30px rgba(255,255,255,0.3);
+}
+
+.navigationBar button:not(.registerButton):hover {
   opacity: 0.6
+}
+
+.logoTitleBackground {
+  margin-left: 5%;
+  font-size: 13vh;
+  color:#190929;
+}
+
+.logoTitleBackground b {
+  color: #471B75;
+}
+
+.sloganAndStartNowSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: -5%;
+}
+
+.sloganAndStartNowSection h3 {
+  color: white;
+  font-weight: normal;
+}
+
+.sloganAndStartNowSection button {
+  font-weight: 500;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.3s;
+  background: white;
+  color: #471B75;
+  padding: 10px 20px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.sloganAndStartNowSection button:hover {
+  box-shadow: 0 0 30px rgba(255,255,255,0.3);
 }

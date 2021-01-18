@@ -9,8 +9,6 @@ const Home: React.FC = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1 className={styles.logoTitleBackground}>anthe.</h1>
-
       <main className={styles.main}>
         <nav className={styles.navigationBar}>
           <h1>a</h1>
@@ -20,6 +18,14 @@ const Home: React.FC = () => {
             <button className={styles.registerButton}>Cadastre-se</button>
           </div>
         </nav>
+
+        <h1 className={styles.logoTitleBackground}>an<b>th</b>e<b>.</b></h1>
+
+        <section className={styles.sloganAndStartNowSection}>
+          <h3>Leve sua produtividade para outro nível.</h3>
+
+          <button>Começar agora</button>
+        </section>
       </main>
     </div>
   )
