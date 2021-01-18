@@ -1,7 +1,23 @@
 import Head from 'next/head'
-import styles from '../styles/pages/Home.module.css'
+import { useRouter } from 'next/router'
+import { FormEvent } from 'react'
+import styles from '../styles/pages/index.module.css'
 
 const Home: React.FC = () => {
+  const router = useRouter()
+
+  function navigateToLogin(event: FormEvent) {
+    event.preventDefault()
+
+    router.push('/login')
+  }
+
+  function navigateToRegister(event: FormEvent) {
+    event.preventDefault()
+
+    router.push('/register')
+  }
+
   return (
     <div className={styles.container}>
       <Head>
