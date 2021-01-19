@@ -19,8 +19,9 @@
   margin-top: 50%;
 }
 
-.sideBar nav > button {
+.sideBar nav button {
   display: flex;
+  cursor: pointer;
   align-items: center;
   width: 80%;
   padding: 10px 0;
@@ -28,8 +29,19 @@
   font-size: 14px;
   font-weight: 500;
   color: white;
+  transition: opacity 0.3s ease;
 }
 
-.sideBar nav > button svg {
+.sideBar nav button:hover {
+  opacity: 0.6
+}
+
+.sideBar nav button svg {
   margin-right: 10px;
+}
+
+.selected {
+  background: #471B75;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
 }

@@ -1,11 +1,18 @@
 import Head from 'next/head'
+import { useState } from 'react'
 import styles from '../styles/pages/app.module.css'
 
-import { FiInbox, FiCalendar, FiFolder } from 'react-icons/fi'
+import { FiInbox, FiCalendar, FiBook } from 'react-icons/fi'
 
 import Accordion from '../components/Accordion'
 
 const App: React.FC = () => {
+  const [activeComponent, setActiveComponent] = useState('todayComponent')
+
+  function toggleActiveComponent(componentToShow: string) {
+    setActiveComponent(componentToShow)
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -15,20 +22,63 @@ const App: React.FC = () => {
 
       <aside className={styles.sideBar}>
         <nav className={styles.navigationItems}>
-          <button>
+          <button
+            className={
+              activeComponent === 'todayComponent'
+              && styles.selected
+            }
+            onClick={() => toggleActiveComponent('todayComponent')}
+          >
             <FiCalendar size={20} />
             Hoje
           </button>
-          <button>
+          <button
+            className={
+              activeComponent === 'inboxComponent'
+              && styles.selected
+            }
+            onClick={() => toggleActiveComponent('inboxComponent')}
+          >
             <FiInbox size={20} />
             Inbox
           </button>
           <Accordion
             title="Projetos"
           >
-            <p>hello1</p>
-            <p>hello1</p>
-            <p>hello1</p>
+            <button
+              className={
+                activeComponent === 'project'
+                && styles.selected
+              }
+              onClick={() => toggleActiveComponent('project')}
+            >
+              <FiBook size={20} />
+              Escola
+            </button>
+            <button>
+              <FiBook size={20} />
+              Trabalho
+            </button>
+            <button>
+              <FiBook size={20} />
+              Pessoal
+            </button>
+          </Accordion>
+          <Accordion
+            title="Categorias"
+          >
+            <button>
+              <FiBook size={20} />
+              Projeto 1
+            </button>
+            <button>
+              <FiBook size={20} />
+              Projeto 2
+            </button>
+            <button>
+              <FiBook size={20} />
+              Projeto 3
+            </button>
           </Accordion>
         </nav>
       </aside>
