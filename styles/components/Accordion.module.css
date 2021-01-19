@@ -1,0 +1,30 @@
+.accordionContainer {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  cursor: pointer;
+}
+
+.accordion {
+  display: flex;
+  align-items: center;
+  transition: background 0.6s ease;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.accordionTitle {
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+}
+
+.accordion svg {
+  transition: transform 0.4s ease;
+  margin-right: 10px;
+}
+
+.accordionContent {
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}

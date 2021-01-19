@@ -1,0 +1,35 @@
+.container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  background: #222;
+}
+
+.sideBar {
+  display: flex;
+  height: 100%;
+  background: #333;
+}
+
+.sideBar nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 175px;
+  margin-top: 50%;
+}
+
+.sideBar nav > button {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  padding: 10px 0;
+  padding-left: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+}
+
+.sideBar nav > button svg {
+  margin-right: 10px;
+}
