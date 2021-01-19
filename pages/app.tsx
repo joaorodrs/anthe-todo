@@ -7,7 +7,7 @@ import { FiInbox, FiCalendar, FiBook } from 'react-icons/fi'
 import Accordion from '../components/Accordion'
 
 const App: React.FC = () => {
-  const [activeComponent, setActiveComponent] = useState('todayComponent')
+  const [activeComponent, setActiveComponent] = useState('Hoje')
 
   function toggleActiveComponent(componentToShow: string) {
     setActiveComponent(componentToShow)
@@ -16,28 +16,29 @@ const App: React.FC = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Anthe Todo</title>
+        <title>{`Anthe: ${activeComponent}`}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <aside className={styles.sideBar}>
+        <h1 className={styles.logoTitle}>anthe.</h1>
         <nav className={styles.navigationItems}>
           <button
             className={
-              activeComponent === 'todayComponent'
+              activeComponent === 'Hoje'
               && styles.selected
             }
-            onClick={() => toggleActiveComponent('todayComponent')}
+            onClick={() => toggleActiveComponent('Hoje')}
           >
             <FiCalendar size={20} />
             Hoje
           </button>
           <button
             className={
-              activeComponent === 'inboxComponent'
+              activeComponent === 'Inbox'
               && styles.selected
             }
-            onClick={() => toggleActiveComponent('inboxComponent')}
+            onClick={() => toggleActiveComponent('Inbox')}
           >
             <FiInbox size={20} />
             Inbox
@@ -45,45 +46,51 @@ const App: React.FC = () => {
           <Accordion
             title="Projetos"
           >
-            <button
+            <a
               className={
-                activeComponent === 'project'
+                activeComponent === 'Escola'
                 && styles.selected
               }
-              onClick={() => toggleActiveComponent('project')}
+              onClick={() => toggleActiveComponent('Escola')}
             >
               <FiBook size={20} />
               Escola
-            </button>
-            <button>
+            </a>
+            <a>
               <FiBook size={20} />
               Trabalho
-            </button>
-            <button>
+            </a>
+            <a>
               <FiBook size={20} />
               Pessoal
-            </button>
+            </a>
           </Accordion>
           <Accordion
             title="Categorias"
           >
-            <button>
+            <a>
               <FiBook size={20} />
               Projeto 1
-            </button>
-            <button>
+            </a>
+            <a>
               <FiBook size={20} />
               Projeto 2
-            </button>
-            <button>
+            </a>
+            <a>
               <FiBook size={20} />
               Projeto 3
-            </button>
+            </a>
           </Accordion>
         </nav>
       </aside>
 
-      <main className={styles.main}></main>
+      <main className={styles.main}>
+        <header>
+          <button>{''}</button>
+          <button>Hoje</button>
+          <button>Inbox</button>
+        </header>
+      </main>
     </div>
   )
 }

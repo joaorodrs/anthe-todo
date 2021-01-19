@@ -2,13 +2,21 @@
   height: 100vh;
   display: flex;
   align-items: center;
-  background: #222;
+  background: linear-gradient(100deg, black, #471B75)
 }
 
 .sideBar {
   display: flex;
   height: 100%;
-  background: #333;
+  background: rgba(255,255,255,0.08);
+  flex-direction: column;
+  align-items: center;
+}
+
+.logoTitle {
+  font-size: 40px;
+  color: #471B75;
+  margin-top: 30px;
 }
 
 .sideBar nav {
@@ -16,10 +24,10 @@
   flex-direction: column;
   align-items: center;
   width: 175px;
-  margin-top: 50%;
+  margin-top: 30px;
 }
 
-.sideBar nav button {
+.sideBar nav button, .sideBar nav a {
   display: flex;
   cursor: pointer;
   align-items: center;
@@ -27,21 +35,50 @@
   padding: 10px 0;
   padding-left: 10px;
   font-size: 14px;
+  border-radius: 0.5rem;
   font-weight: 500;
   color: white;
-  transition: opacity 0.3s ease;
+  transition: 0.3s ease;
 }
 
-.sideBar nav button:hover {
-  opacity: 0.6
+.sideBar nav button:not(.selected):hover, .sideBar nav a:not(.selected):hover {
+  opacity: 0.6;
 }
 
-.sideBar nav button svg {
+.sideBar nav button svg, .sideBar nav a svg {
   margin-right: 10px;
 }
 
 .selected {
   background: #471B75;
-  border-radius: 0.5rem;
   box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  cursor: default;
+}
+
+.sideBar nav a {
+  width: 100%;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.main header {
+  display: flex;
+  justify-content: space-between;
+  background: blue;
+  padding: 20px;
+}
+
+.main header button {
+  color: white;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.main header button:nth-of-type(2) {
+  font-size: 30px;
 }
