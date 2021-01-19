@@ -6,13 +6,13 @@ import styles from '../styles/pages/index.module.css'
 const Home: React.FC = () => {
   const router = useRouter()
 
-  function navigateToLogin(event: FormEvent) {
+  function navigateToLoginPage(event: FormEvent) {
     event.preventDefault()
 
     router.push('/login')
   }
 
-  function navigateToRegister(event: FormEvent) {
+  function navigateToRegisterPage(event: FormEvent) {
     event.preventDefault()
 
     router.push('/register')
@@ -30,8 +30,8 @@ const Home: React.FC = () => {
           <h1>a</h1>
           <div>
             <button>Início</button>
-            <button>Entrar</button>
-            <button className={styles.registerButton}>Cadastre-se</button>
+            <button onClick={navigateToLoginPage}>Entrar</button>
+            <button onClick={navigateToRegisterPage} className={styles.registerButton}>Cadastre-se</button>
           </div>
         </nav>
 
@@ -40,7 +40,7 @@ const Home: React.FC = () => {
         <section className={styles.sloganAndStartNowSection}>
           <h3>Leve sua produtividade para outro nível.</h3>
 
-          <button>Começar agora</button>
+          <button onClick={navigateToRegisterPage}>Começar agora</button>
         </section>
       </main>
     </div>

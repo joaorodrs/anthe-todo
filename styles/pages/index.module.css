@@ -40,7 +40,7 @@
 .registerButton {
   background: white;
   color: #471B75;
-  padding: 0 5px;
+  padding: 8px 15px;
   border-radius: 8px;
 }
 
@@ -56,6 +56,7 @@
   margin-left: 5%;
   font-size: 13vh;
   color:#190929;
+  user-select: none;
 }
 
 .logoTitleBackground b {
@@ -89,4 +90,19 @@
 
 .sloganAndStartNowSection button:hover {
   box-shadow: 0 0 30px rgba(255,255,255,0.3);
+}
+
+@media (min-width: 800px) {
+  .logoTitleBackground {
+    font-size: 35vh;
+  }
+
+  .sloganAndStartNowSection {
+    align-items: flex-start;
+    margin-left: 5%;
+  }
+
+  .sloganAndStartNowSection button {
+    margin-top: 20px;
+  }
 }

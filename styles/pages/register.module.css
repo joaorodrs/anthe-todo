@@ -15,7 +15,6 @@
   font-size: 8vh;
   margin-top: 5%;
   color: #471B75;
-  user-select: none;
 }
 
 .cardForm {
@@ -31,21 +30,19 @@
 
 .signInButtons {
   display: flex;
-  flex-direction: column;
-  width: 100%;
+  width: 85%;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   margin-top: 5%;
 }
 
 .signInButtons button {
   padding: 10px 0;
-  width: 85%;
+  width: 47%;
   border: 1px solid #ccc;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 10px;
   font-size: 18px;
   border-radius: 0.5rem;
   transition: 0.3s;
@@ -58,22 +55,18 @@
   opacity: 0.6
 }
 
-.signInButtons button svg {
-  margin-left: 10px;
-}
-
 .cardForm p {
   margin-top: 10px;
 }
 
-.toRegisterLink {
+.toLoginLink {
   color: #471B75;
   font-weight: 500;
   cursor: pointer;
   transition: 0.3s;
 }
 
-.toRegisterLink:hover {
+.toLoginLink:hover {
   opacity: 0.6;
 }
 
@@ -139,6 +132,7 @@
 
 @media (min-width: 800px) {
   .logoTitle {
-    font-size: 10vh;
+    font-size: 8vh;
+    line-height: 10vh;
   }
 }
