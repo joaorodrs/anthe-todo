@@ -5,6 +5,7 @@ import styles from '../styles/pages/app.module.css'
 import { FiInbox, FiCalendar, FiBook, FiMenu } from 'react-icons/fi'
 
 import Accordion from '../components/Accordion'
+import TaskBoard from '../components/TaskBoard'
 
 const App: React.FC = () => {
   const [activeComponent, setActiveComponent] = useState('Hoje')
@@ -15,11 +16,13 @@ const App: React.FC = () => {
   }
 
   function toggleSideMenu() {
-    setShowSideMenu(true)
+    setShowSideMenu(oldValue => !oldValue)
   }
 
-  function toggleBackdropPress() {
-    setShowSideMenu(false)
+  const task = {
+    title: 'Tarefa um',
+    description: 'Uma tarefa legal',
+    dueTime: ''
   }
 
   return (
@@ -102,11 +105,12 @@ const App: React.FC = () => {
 
       <main
         className={styles.main}
-        onClick={toggleBackdropPress}
+        onClick={toggleSideMenu}
       >
         <header>
-          <h2>Hoje</h2>
+          <h2>{activeComponent}</h2>
         </header>
+        <TaskBoard taskCategory={activeComponent} />
       </main>
     </div>
   )
