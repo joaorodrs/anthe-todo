@@ -2,15 +2,24 @@ import Head from 'next/head'
 import { useState } from 'react'
 import styles from '../styles/pages/app.module.css'
 
-import { FiInbox, FiCalendar, FiBook } from 'react-icons/fi'
+import { FiInbox, FiCalendar, FiBook, FiMenu } from 'react-icons/fi'
 
 import Accordion from '../components/Accordion'
 
 const App: React.FC = () => {
   const [activeComponent, setActiveComponent] = useState('Hoje')
+  const [showSideMenu, setShowSideMenu] = useState(false)
 
   function toggleActiveComponent(componentToShow: string) {
     setActiveComponent(componentToShow)
+  }
+
+  function toggleSideMenu() {
+    setShowSideMenu(true)
+  }
+
+  function toggleBackdropPress() {
+    setShowSideMenu(false)
   }
 
   return (
@@ -20,7 +29,14 @@ const App: React.FC = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <aside className={styles.sideBar}>
+      <button
+        onClick={toggleSideMenu}
+        className={styles.menuButton}
+      >
+        <FiMenu size={25} color="white" />
+      </button>
+
+      <aside className={styles.sideBar} style={{ left: showSideMenu ? '0px' : '-175px' }}>
         <h1 className={styles.logoTitle}>anthe.</h1>
         <nav className={styles.navigationItems}>
           <button
@@ -84,11 +100,12 @@ const App: React.FC = () => {
         </nav>
       </aside>
 
-      <main className={styles.main}>
+      <main
+        className={styles.main}
+        onClick={toggleBackdropPress}
+      >
         <header>
-          <button>{''}</button>
-          <button>Hoje</button>
-          <button>Inbox</button>
+          <h2>Hoje</h2>
         </header>
       </main>
     </div>
