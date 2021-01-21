@@ -6,6 +6,7 @@ import { FiInbox, FiCalendar, FiBook, FiMenu, FiPlus, FiEdit2, FiCircle } from '
 
 import Accordion from '../components/Accordion'
 import TaskBoard from '../components/TaskBoard'
+import Modal from '../components/Modal'
 
 import firebase from '../config/firebase-config'
 
@@ -20,7 +21,7 @@ const App: React.FC = () => {
   const [activeComponent, setActiveComponent] = useState('Hoje')
   const [showSideMenu, setShowSideMenu] = useState(false)
 
-  const [creatingProject, setCreatingProject] = useState(false)
+  const [showCreateProjectModal, setShowCreateProjectModal] = useState(false)
 
   const [projects, setProjects] = useState<Project[]>([])
 
@@ -28,8 +29,12 @@ const App: React.FC = () => {
     setActiveComponent(componentToShow)
   }
 
-  function toggleSideMenu() {
-    setShowSideMenu(oldValue => !oldValue)
+  function toggleSideMenu(isBackDropPress?: boolean) {
+    if (isBackDropPress) {
+      setShowSideMenu(oldValue => oldValue ? false : oldValue)
+    } else {
+      setShowSideMenu(oldValue => !oldValue)
+    }
   }
 
   function createProject() {
@@ -41,7 +46,7 @@ const App: React.FC = () => {
   useEffect(() => {
     firebase.firestore()
       .collection('projects')
-      .where('fromUserEmail', '==', 'jpjoao1001@gmail.com')
+      .where('fromUserEmail', '==', localStorage.getItem('userEmail'))
       .onSnapshot(snap => {
         const projects = snap.docs.map(doc => ({
           id: doc.id,
@@ -49,18 +54,24 @@ const App: React.FC = () => {
         }))
 
         setProjects(projects)
-      })
+      })  
   })
 
   return (
     <div className={styles.container}>
+      {showCreateProjectModal && (
+        <Modal onBackdropPress={() => setShowCreateProjectModal(false)}>
+          <h1>Hello world</h1>
+        </Modal>
+      )}
+
       <Head>
         <title>{`Anthe: ${activeComponent}`}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <button
-        onClick={toggleSideMenu}
+        onClick={() => toggleSideMenu()}
         className={styles.menuButton}
       >
         <FiMenu size={25} color="white" />
@@ -72,9 +83,12 @@ const App: React.FC = () => {
           <button
             className={
               activeComponent === 'Hoje'
-              && styles.selected
+              ? styles.selected : ''
             }
-            onClick={() => toggleActiveComponent('Hoje')}
+            onClick={() => {
+              setShowSideMenu(false)
+              toggleActiveComponent('Hoje')
+            }}
           >
             <FiCalendar size={20} />
             Hoje
@@ -82,9 +96,12 @@ const App: React.FC = () => {
           <button
             className={
               activeComponent === 'Inbox'
-              && styles.selected
+              ? styles.selected : ''
             }
-            onClick={() => toggleActiveComponent('Inbox')}
+            onClick={() => {
+              setShowSideMenu(false)
+              toggleActiveComponent('Inbox')
+            }}
           >
             <FiInbox size={20} />
             Inbox
@@ -92,36 +109,31 @@ const App: React.FC = () => {
           <Accordion
             title="Projetos"
           >
-            {projects.reverse().map(project => (
+            {projects.map(project => (
               <a
+                key={project.id}
                 className={
                   activeComponent === project.projectName
-                  && styles.selected
+                  ? styles.selected : ''
                 }
-                onClick={() => toggleActiveComponent(project.projectName)}
+                onClick={() => {
+                  setShowSideMenu(false)
+                  toggleActiveComponent(project.projectName)
+                }}
               >
                 <FiBook size={20} color={project.projectColor} />
                 {project.projectName}
               </a>
             ))}
-            {creatingProject ? (
-                <div className={styles.projectInputWrapper}>
-                  <select>
-                    <option value="blue">blue</option>
-                  </select>
-                  <input
-                    className={styles.createProjectInput}
-                  />
-                </div>
-              ) : (
-                <a
-                  onClick={() => setCreatingProject(true)}
-                >
-                  <FiPlus size={20} color="#6627aa" />
-                  Criar projeto
-                </a>
-              )
-            }
+            <a
+              onClick={() => {
+                setShowSideMenu(false)
+                setShowCreateProjectModal(true)
+              }}
+            >
+              <FiPlus size={20} color="#6627aa" />
+              Criar projeto
+            </a>
           </Accordion>
           <Accordion
             title="Categorias"
@@ -144,7 +156,7 @@ const App: React.FC = () => {
 
       <main
         className={styles.main}
-        onClick={toggleSideMenu}
+        onClick={() => toggleSideMenu(true)}
       >
         <header>
           <h2>{activeComponent}</h2>
