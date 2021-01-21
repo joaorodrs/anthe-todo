@@ -2,11 +2,11 @@ import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import styles from '../styles/pages/app.module.css'
 
-import { FiInbox, FiCalendar, FiBook, FiMenu, FiPlus, FiEdit2, FiCircle } from 'react-icons/fi'
+import { FiInbox, FiCalendar, FiBook, FiMenu, FiPlus } from 'react-icons/fi'
 
 import Accordion from '../components/Accordion'
 import TaskBoard from '../components/TaskBoard'
-import Modal from '../components/Modal'
+import Modal from '../utils/Modal/Modal'
 
 import firebase from '../config/firebase-config'
 
@@ -61,7 +61,10 @@ const App: React.FC = () => {
     <div className={styles.container}>
       {showCreateProjectModal && (
         <Modal onBackdropPress={() => setShowCreateProjectModal(false)}>
-          <h1>Hello world</h1>
+          <h2>Criar projeto</h2>
+          <div>
+            <input placeholder="Comprar arroz" />
+          </div>
         </Modal>
       )}
 
