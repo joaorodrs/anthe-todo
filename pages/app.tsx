@@ -6,7 +6,9 @@ import { FiInbox, FiCalendar, FiBook, FiMenu, FiPlus } from 'react-icons/fi'
 
 import Accordion from '../components/Accordion'
 import TaskBoard from '../components/TaskBoard'
-import Modal from '../utils/Modal/Modal'
+import ModalProjectCreate from '../components/ModalProjectCreate'
+
+import Modal from '../components/Modal'
 
 import firebase from '../config/firebase-config'
 
@@ -59,14 +61,7 @@ const App: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      {showCreateProjectModal && (
-        <Modal onBackdropPress={() => setShowCreateProjectModal(false)}>
-          <h2>Criar projeto</h2>
-          <div>
-            <input placeholder="Comprar arroz" />
-          </div>
-        </Modal>
-      )}
+      {showCreateProjectModal && <ModalProjectCreate onBackdropPress={() => setShowCreateProjectModal(false)} />}
 
       <Head>
         <title>{`Anthe: ${activeComponent}`}</title>

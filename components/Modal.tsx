@@ -1,7 +1,6 @@
-import styles from './Modal.module.css'
+import styles from '../styles/components/Modal.module.css'
 
 interface ModalProps {
-  children: React.ReactNode,
   onBackdropPress: () => void
 }
 

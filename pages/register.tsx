@@ -42,8 +42,6 @@ const Register: React.FC = () => {
     try {
       await firebase.auth().signInWithPopup(provider)
 
-      console.log(firebase.auth().currentUser)
-
       localStorage.setItem('userName', firebase.auth().currentUser.displayName)
       localStorage.setItem('userEmail', firebase.auth().currentUser.email)
 

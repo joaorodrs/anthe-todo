@@ -4,11 +4,10 @@ import { useState, useRef } from 'react'
 import { FiChevronRight, FiRotateCcw } from 'react-icons/fi'
 
 interface AccordionProps {
-  title: string,
-  children: React.ReactNode
+  title: string
 }
 
-const Accordion: React.FC<AccordionProps> = ({ title, children, className }) => {
+const Accordion: React.FC<AccordionProps> = ({ title, children }) => {
   const [activeAccordion, setActiveAccordion] = useState('')
   const [accordionContentHeight, setAccordionContentHeight] = useState('0px')
 
