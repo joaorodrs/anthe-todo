@@ -1,10 +1,15 @@
 import Head from 'next/head'
 import { useRef, useState } from 'react'
+import { useRouter } from 'next/router'
 import styles from '../styles/pages/register.module.css'
+
+import firebase from '../config/firebase-config'
 
 import { IoLogoGoogle, IoLogoFacebook, IoEye, IoEyeOff } from 'react-icons/io5'
 
 const Register: React.FC = () => {
+  const router = useRouter()
+
   const [name, setName] = useState<string>()
   const [email, setEmail] = useState<string>()
   const [password, setPassword] = useState<string>()
@@ -16,6 +21,55 @@ const Register: React.FC = () => {
   const passwordInputRef = useRef(null)
   const confirmPasswordInputRef = useRef(null)
 
+  async function registerNewUser(userName: string, userEmail: string, userPassword: string) {
+    await firebase.firestore()
+      .collection('users')
+      .add({
+        userName,
+        userEmail,
+        userPassword
+      })
+
+    localStorage.setItem('userName', userName)
+    localStorage.setItem('userEmail', userEmail)
+    
+    router.push('app')
+  }
+
+  async function logInWithGoogle() {
+    const provider = new firebase.auth.GoogleAuthProvider()
+
+    try {
+      await firebase.auth().signInWithPopup(provider)
+
+      console.log(firebase.auth().currentUser)
+
+      localStorage.setItem('userName', firebase.auth().currentUser.displayName)
+      localStorage.setItem('userEmail', firebase.auth().currentUser.email)
+
+      router.push('app')
+    } catch(error) {
+      console.error(error)
+    }
+  }
+
+  async function logInWithFacebook() {
+    const provider = new firebase.auth.FacebookAuthProvider()
+
+    try {
+      await firebase.auth().signInWithPopup(provider)
+
+      console.log(firebase.auth().currentUser)
+
+      localStorage.setItem('userName', firebase.auth().currentUser.displayName)
+      localStorage.setItem('userEmail', firebase.auth().currentUser.email)
+
+      router.push('app')
+    } catch(error) {
+      console.error(error)
+    }
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -25,10 +79,13 @@ const Register: React.FC = () => {
 
       <main className={styles.main}>
         <h1 className={styles.logoTitle}>anthe.</h1>
-        <form className={styles.cardForm}>
+        <form
+          className={styles.cardForm}
+          onSubmit={() => registerNewUser(name, email, password)}
+        >
           <div className={styles.signInButtons}>
-            <button><IoLogoGoogle size={30} color="#DB4437" /></button>
-            <button><IoLogoFacebook size={30} color="#1778F2" /></button>
+            <a onClick={logInWithGoogle}><IoLogoGoogle size={30} color="#DB4437" /></a>
+            <a onClick={logInWithFacebook}><IoLogoFacebook size={30} color="#1778F2" /></a>
           </div>
           <p>Já tem conta? <a href="login" className={styles.toLoginLink}>Entrar</a></p>
           <input

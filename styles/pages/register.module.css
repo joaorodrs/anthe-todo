@@ -36,7 +36,7 @@
   margin-top: 5%;
 }
 
-.signInButtons button {
+.signInButtons a {
   padding: 10px 0;
   width: 47%;
   border: 1px solid #ccc;
@@ -51,7 +51,7 @@
   cursor: pointer;
 }
 
-.signInButtons button:hover {
+.signInButtons a:hover {
   opacity: 0.6
 }
 
