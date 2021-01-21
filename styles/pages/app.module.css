@@ -76,6 +76,35 @@
   width: 100%;
 }
 
+.projectInputWrapper {
+  display: flex;
+  align-items: center;
+  height: 35px;
+}
+
+.projectInputWrapper > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.createProjectInput {
+  margin-left: 6px;
+  border-bottom: 1px solid #471B75;
+  height: 90%;
+  padding-left: 5px;
+  font-size: 15px;
+  color: white;
+  max-width: 120px;
+}
+
+.blue {
+  width: 10px;
+  height: 10px;
+  background: blue;
+  border-radius: 50%;
+}
+
 .main {
   display: flex;
   flex-direction: column;

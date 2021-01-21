@@ -1,15 +1,28 @@
 import Head from 'next/head'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from '../styles/pages/app.module.css'
 
-import { FiInbox, FiCalendar, FiBook, FiMenu } from 'react-icons/fi'
+import { FiInbox, FiCalendar, FiBook, FiMenu, FiPlus, FiEdit2, FiCircle } from 'react-icons/fi'
 
 import Accordion from '../components/Accordion'
 import TaskBoard from '../components/TaskBoard'
 
+import firebase from '../config/firebase-config'
+
+interface Project {
+  id: string,
+  fromUserEmail?: string,
+  projectColor?: string,
+  projectName?: string
+}
+
 const App: React.FC = () => {
   const [activeComponent, setActiveComponent] = useState('Hoje')
   const [showSideMenu, setShowSideMenu] = useState(false)
+
+  const [creatingProject, setCreatingProject] = useState(false)
+
+  const [projects, setProjects] = useState<Project[]>([])
 
   function toggleActiveComponent(componentToShow: string) {
     setActiveComponent(componentToShow)
@@ -19,11 +32,25 @@ const App: React.FC = () => {
     setShowSideMenu(oldValue => !oldValue)
   }
 
-  const task = {
-    title: 'Tarefa um',
-    description: 'Uma tarefa legal',
-    dueTime: ''
+  function createProject() {
+    firebase.firestore()
+      .collection('projects')
+      .add({})
   }
+
+  useEffect(() => {
+    firebase.firestore()
+      .collection('projects')
+      .where('fromUserEmail', '==', 'jpjoao1001@gmail.com')
+      .onSnapshot(snap => {
+        const projects = snap.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }))
+
+        setProjects(projects)
+      })
+  })
 
   return (
     <div className={styles.container}>
@@ -65,24 +92,36 @@ const App: React.FC = () => {
           <Accordion
             title="Projetos"
           >
-            <a
-              className={
-                activeComponent === 'Escola'
-                && styles.selected
-              }
-              onClick={() => toggleActiveComponent('Escola')}
-            >
-              <FiBook size={20} />
-              Escola
-            </a>
-            <a>
-              <FiBook size={20} />
-              Trabalho
-            </a>
-            <a>
-              <FiBook size={20} />
-              Pessoal
-            </a>
+            {projects.reverse().map(project => (
+              <a
+                className={
+                  activeComponent === project.projectName
+                  && styles.selected
+                }
+                onClick={() => toggleActiveComponent(project.projectName)}
+              >
+                <FiBook size={20} color={project.projectColor} />
+                {project.projectName}
+              </a>
+            ))}
+            {creatingProject ? (
+                <div className={styles.projectInputWrapper}>
+                  <select>
+                    <option value="blue">blue</option>
+                  </select>
+                  <input
+                    className={styles.createProjectInput}
+                  />
+                </div>
+              ) : (
+                <a
+                  onClick={() => setCreatingProject(true)}
+                >
+                  <FiPlus size={20} color="#6627aa" />
+                  Criar projeto
+                </a>
+              )
+            }
           </Accordion>
           <Accordion
             title="Categorias"
